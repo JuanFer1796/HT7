@@ -1,30 +1,29 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+/**
+ * Codigo tomado de ejemplo de clase de Algoritmos y Estructura de datos de maestro Moises UVG
+ * @author Juan Fernando Ramirez
+ * @param <K>
+ * @param <T>
+ */
 
 public class VisitarPalabra<K,T> implements IVisitar<K,T>{
-    File archivo;
+
     String listadoElementos;
 
-    public VisitarPalabra(String path) {
-        archivo = new File(path);
+    public VisitarPalabra() {
         listadoElementos = "";
     }
 
+    /**
+     *
+     * @param arbol
+     */
     @Override
     public void VisitarNodo(NodoArbol<K, T> arbol) {
         Palabra actual = (Palabra) arbol._value;
         //ListadoElementos = ListadoElementos + "";
         listadoElementos += "Ingles: " + actual.inlges + " Frances: " + actual.frances +
                 " Espanol: " + actual.espanol + "\r\n";
-        System.out.println(listadoElementos);
-        try {
-            FileWriter fw = new FileWriter(archivo, false);
-            fw.write(listadoElementos );
-            fw.close();
-        }catch(IOException e) {
-            e.printStackTrace();
-        }
 
+        System.out.println(listadoElementos);
     }
 }

@@ -1,3 +1,9 @@
+/**
+ * Codigo tomado de ejemplo de clase de Algoritmos y Estructura de datos de maestro Moises UVG
+ * @author Juan Fernando Ramirez
+ * @param <K>
+ * @param <T>
+ */
 public class ComparadorPalabras<K,T> implements IComparator<K,T>{
     @Override
     public int Compare(K abb1, K abb2) {

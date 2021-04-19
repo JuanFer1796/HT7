@@ -1,3 +1,9 @@
+/**
+ * Codigo tomado de ejemplo de clase de Algoritmos y Estructura de datos de maestro Moises UVG
+ * @author Juan Fernando Ramirez
+ * @param <K>
+ * @param <T>
+ */
 public class ArbolBinarioBusqueda<K, T> implements IArbolBinario<K, T> {
 
     public NodoArbol<K, T> _raiz;
@@ -5,6 +11,11 @@ public class ArbolBinarioBusqueda<K, T> implements IArbolBinario<K, T> {
     IComparator<K, T> _keyComparator;
     IKeyCalculator<K, T> _keyCalculator;
 
+    /**
+     *
+     * @param metodoComparar
+     * @param metodoCalcularLlave
+     */
     public ArbolBinarioBusqueda(IComparator<K, T> metodoComparar, IKeyCalculator<K, T> metodoCalcularLlave) {
         _keyComparator = metodoComparar;
         _keyCalculator = metodoCalcularLlave;
@@ -12,6 +23,11 @@ public class ArbolBinarioBusqueda<K, T> implements IArbolBinario<K, T> {
         _count = 0;
     }
 
+    /**
+     *
+     * @param key
+     * @param value
+     */
     @Override
     public void Insert(K key, T value) {
         NodoArbol<K, T> _new = new NodoArbol<K, T>(key, value);
@@ -29,6 +45,12 @@ public class ArbolBinarioBusqueda<K, T> implements IArbolBinario<K, T> {
         }
     }
 
+    /**
+     *
+     * @param _actual
+     * @param _new
+     * @throws Exception
+     */
     private void InsertAux(NodoArbol<K, T> _actual, NodoArbol<K, T> _new) throws Exception{
         if (_actual != null) {
 
@@ -54,36 +76,50 @@ public class ArbolBinarioBusqueda<K, T> implements IArbolBinario<K, T> {
         }
     }
 
+    /**
+     *
+     * @param key
+     * @return
+     */
     @Override
     public T Delete(K key) {
         // TODO Auto-generated method stub
         return null;
     }
 
+    /**
+     *
+     * @param key
+     * @param value
+     * @return retorna un nodo para seguir buscando o bien para devolver y poder traducir la palabra correctamente
+     */
     @Override
-    public T Find( K key) {
-        // Base Cases: root is null or key is present at root
-        if (_raiz==null || _raiz._key.equals(key))
-            return _raiz._value;
+    public T Find( K key, NodoArbol<K,T> value) {
+        T temp = null;
 
-        // Key is greater than root's key
-        else if (_keyComparator.Compare(_raiz._key, key)>0)
-            return Find(_raiz.hijoDerecho._key);
 
-        // Key is smaller than root's key
-        else if(_keyComparator.Compare(_raiz._key, key)>0 && _raiz != null){
-            return Find(_raiz.hijoIzquierdo._key);
+        if (value != null) {
+
+            if((value._key).equals(key)){
+                temp = value._value;
+            }
+
+            if(temp == (null)){
+                temp = Find(key, value.hijoIzquierdo);
+            }
+            if(temp == (null)){
+                temp = Find(key, value.hijoDerecho);
+            }
+
         }
-        String s = "hhhh";
-        System.out.println(_raiz._key);
-        System.out.println(key);
-        System.out.println(_keyComparator.Compare(_raiz._key, key)>0 && _raiz != null);
-        System.out.println(_keyComparator.Compare(_raiz._key, key)<0 && _raiz != null);
-        System.out.println(_raiz==null || _raiz._key==key);
-        return (T) s;
+
+        return temp;
     }
 
-
+    /**
+     *
+     * @return
+     */
     @Override
     public int Count() {
         return _count;
@@ -97,15 +133,23 @@ public class ArbolBinarioBusqueda<K, T> implements IArbolBinario<K, T> {
     @Override
     public void InOrder(IVisitar<K, T> visitNode, NodoArbol<K, T> actual) {
         if (actual != null) {
+
             InOrder(visitNode, actual.hijoIzquierdo);
 
             visitNode.VisitarNodo(actual);
 
             InOrder(visitNode, actual.hijoDerecho);
+
+
         }
 
     }
 
+    /**
+     *
+     * @param visitNode
+     * @param actual
+     */
     @Override
     public void PreOrder(IVisitar<K, T> visitNode, NodoArbol<K, T> actual) {
         if (actual != null) {
@@ -118,6 +162,11 @@ public class ArbolBinarioBusqueda<K, T> implements IArbolBinario<K, T> {
 
     }
 
+    /**
+     *
+     * @param visitNode
+     * @param actual
+     */
     @Override
     public void PostOrder(IVisitar<K, T> visitNode, NodoArbol<K, T> actual) {
         if (actual != null) {

@@ -1,6 +1,0 @@
-Ingles: dog Frances: chien Espanol: perro
-Ingles: homework Frances: devoirs Espanol: tarea
-Ingles: house Frances:  loger Espanol: casa
-Ingles: town Frances: ville Espanol: pueblo
-Ingles: woman Frances: femme Espanol: mujer
-Ingles: yes Frances: Oui Espanol: si
